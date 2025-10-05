@@ -89,23 +89,6 @@ async function run() {
     //connection or create a new db as name coffees
     const coffeesCollection = client.db('coffeeDB').collection('coffees');
 
-    app.post('/coffess', async (req, res) => {
-      const newCoffee = req.body;
-      console.log(newCoffee);
-
-      //add formdata into mongodb coffee server
-      const result = await coffeesCollection.insertOne(newCoffee);
-      res.send(result);
-    })
-
-    //delete coffee or delete one document
-    app.delete('/coffees/:id', async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) }
-      const result = await coffeesCollection.deleteOne(query);
-      res.send(result);
-
-    })
 
     // create localhost:3000/coffees 
     app.get('/coffees', async (req, res) => {
