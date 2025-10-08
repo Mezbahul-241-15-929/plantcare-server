@@ -33,6 +33,8 @@ async function run() {
     //For Plant Care Website
     const plantCollection = client.db('plantDB').collection('coffees');
 
+
+    //send plnat  data to the mongodb server
     app.post('/plants', async (req, res) => {
       const newplant = req.body;
       console.log(newplant);
@@ -128,17 +130,12 @@ async function run() {
 
     })
 
+    // ......................................................................
     const usersCollection = client.db('coffeeDB').collection('users');
 
     // User related APIs
 
-    //send users singup data to the mongodb server
-    app.post('/users', async (req, res) => {
-      const userProfile = req.body;
-      console.log(userProfile)
-      const result = await usersCollection.insertOne(userProfile);
-      res.send(result);
-    })
+  
     //get user singup data from mongodb server 
     app.get('/users', async (req, res) => {
       const result = await usersCollection.find().toArray();
