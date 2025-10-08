@@ -44,6 +44,7 @@ async function run() {
       res.send(result);
     })
 
+    //get plants  data from mongodb server 
     app.get('/plants', async (req, res) => {
       // const cursor = coffeesCollection.find();
       // const result = await cursor.toArray();
@@ -136,11 +137,6 @@ async function run() {
     // User related APIs
 
   
-    //get user singup data from mongodb server 
-    app.get('/users', async (req, res) => {
-      const result = await usersCollection.find().toArray();
-      res.send(result);
-    })
 
     app.delete('/users/:id', async (req, res) => {
       const id = req.params.id;
