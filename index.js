@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -51,6 +49,11 @@ app.get('/', (req, res) => {
 
 app.get('/health', (req, res) => {
   res.json({ ok: true });
+});
+
+// Browsers request these automatically; no icon is required for the API.
+app.get(['/favicon.ico', '/favicon.png'], (req, res) => {
+  res.status(204).end();
 });
 
 app.post('/plants', async (req, res, next) => {
