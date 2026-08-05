@@ -1,29 +1,20 @@
-require('dotenv').config();
-
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const mongoUri = process.env.MONGODB_URI;
-const databaseName = process.env.MONGODB_DB_NAME || 'plantDB';
-const collectionName = process.env.MONGODB_COLLECTION || 'coffees';
+const mongoUri = 'mongodb+srv://mezbahul:2A3NW9ZuLLtGXaGu@cluster0.1jlx3rd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const databaseName = 'plantDB';
+const collectionName = 'coffees';
 
-app.use(cors({
-  origin: process.env.CLIENT_URL || true,
-  credentials: true,
-}));
+app.use(cors());
 app.use(express.json());
 
 let client;
 let collectionPromise;
 
 function getPlantCollection() {
-  if (!mongoUri) {
-    throw new Error('MONGODB_URI is not configured. Add it to .env locally and Vercel Environment Variables in production.');
-  }
-
   if (!collectionPromise) {
     client = new MongoClient(mongoUri, {
       serverApi: {
